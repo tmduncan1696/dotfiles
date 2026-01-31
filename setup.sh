@@ -23,6 +23,6 @@ install-posh-if-not-exist() {
 install-if-not-exist stow
 install-posh-if-not-exist
 
-for pkg in $(ls -d */ | cut -f1 -d'/'); do
+for pkg in $(ls -d */ | cut -f 1 -d '/'); do
 	stow "$pkg"
 done
