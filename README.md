@@ -35,5 +35,7 @@ chmod +x setup.sh
 ./setup.sh
 ```
 
-The setup script updates Ubuntu and installs `stow` if it isn't already on the system.
-Then uses stow to symlink all the config files in their correct locations.
+The setup script does the following:
+- Installs `stow` if it isn't already on the system
+- Installs `oh-my-posh` and the meslo Nerd Font if it isn't already on the system 
+- Uses `stow` to symlink all the config files in their correct locations

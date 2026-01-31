@@ -10,8 +10,18 @@ install-if-not-exist() {
 	apt install "$1" -y
 }
 
-sudo apt update
+install-posh-if-not-exist() {
+	if command -v oh-my-posh >/dev/null 2>&1; then
+		return
+	fi
+
+	curl -s https://ohmyposh.dev/install.sh | bash -s
+
+	oh-my-posh font meslo
+}
+
 install-if-not-exist stow
+install-posh-if-not-exist
 
 for pkg in $(ls -d */ | cut -f1 -d'/'); do
 	stow "$pkg"
