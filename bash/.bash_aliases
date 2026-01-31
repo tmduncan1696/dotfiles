@@ -1,6 +1,6 @@
 # mkcd function -- makes a directory, then cd into it
-function mkcd {
-	dir="$*"
+mkcd() {
+	local dir="$*"
 	mkdir -p "$dir" && cd "$dir"
 }
 
@@ -17,8 +17,8 @@ alias gcc="git checkout"
 alias gcb="git checkout -b"
 
 # gcm function -- checkout default branch
-function gcm {
-	branch="$(git remote show origin | sed -n '/HEAD branch/s/.*: //p')"
+gcm() {
+	local branch="$(git remote show origin | sed -n '/HEAD branch/s/.*: //p')"
 
 	git checkout "$branch"
 }
