@@ -1,11 +1,13 @@
+[user]
+	name = Thomas Duncan
+	email = tmduncan1696@gmail.com
 [credential "https://github.com"]
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
-[user]
-	name = Thomas Duncan
-	email = tmduncan1696@gmail.com
+[init]
+	defaultBranch = main
 [pull]
 	rebase = true
