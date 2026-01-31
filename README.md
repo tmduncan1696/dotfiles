@@ -7,6 +7,9 @@ Personal dotfiles for Ubuntu setup. Repo contains various environment configurat
 - **Bash**
   .bashrc file
 
+- **Git**
+  .gitconfig file
+
 - **LazyGit**
   Custom lazygit configuration
 
