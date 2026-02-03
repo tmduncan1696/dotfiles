@@ -9,12 +9,10 @@ PACKAGES=$(ls -d */ | cut -f 1 -d '/')
 # Install package
 # takes 1 argument: package to install
 install-package() {
-	if dpkg -s "$1"	&>/dev/null; then
-		PKG_EXIST=$(dpkg -s "$1" | grep "install ok installed")
-		if [[ -n "$PKG_EXIST" ]]; then 
-			echo "$1 is already installed"
-			return
-		fi
+	PKG_EXIST=$(dpkg -s "$1" | grep "install ok installed")
+	if [[ -n "$PKG_EXIST" ]]; then 
+		echo "$1 is already installed"
+		return
 	fi
 
 	echo "Installing $1"
@@ -58,26 +56,58 @@ create-backups() {
 	done <<< $1
 }
 
+copy-home() {
+	local files=$(find $1 -type f)
+	while IFS= read -r file; do
+		cp $file $(sed -n "s|[^/]|$HOME|p" <<< $file)
+	done <<< $files
+}
+
 # Stow packages
 # Args:
 #	Packages to create symlinks for
 stow-packages() {
-	while IFS= read -r pkg; do
-		stow "$pkg"
-	done <<< $1
+	if [[ "$OSTYPE" = "linux-gnu" ]]; then
+		while IFS= read -r pkg; do
+			stow "$pkg"
+		done <<< $1
+	elif [[ "$OSTYPE" = "cygwin" || "$OSTYPE" = "msys" ]]; then
+		while IFS= read -r pkg; do
+			copy-home "$pkg"
+		done <<< $1
+	else
+		echo "Operating System $OSTYPE not implemented" >&2
+	fi
 }
 
-# Install stow if it doesn't exist
-install-package stow
+main() {
+	# If running on Linux
+	if [[ "$OSTYPE" = "linux-gnu" ]]; then
+		# Install stow if it doesn't exist
+		install-package stow
 
-# Stow packages
-create-backups $PACKAGES
-stow-packages $PACKAGES
+		# Install Neovim
+		install-package neovim
+	# if running on Windows
+	elif [[ "$OSTYPE" = "cygwin" || "$OSTYPE" = "msys" ]]; then
+		# Install Neovim
+		winget install Neovim.Neovim
+	else
+		echo "Operating System $OSTYPE not implemented" >&2
+	fi
 
-# Install and setup Neovim
-install-package nvim
-setup-nvim
+	# Stow packages
+	create-backups $PACKAGES
+	stow-packages $PACKAGES
 
-# Install and setup oh-my-posh
-install-posh-if-not-exist
-exec bash
+	# Setup Neovim
+	setup-nvim
+
+	# Install and setup oh-my-posh
+	install-posh
+
+	# Reload .bashrc
+	exec bash
+}
+
+main
