@@ -69,7 +69,7 @@ copy-home() {
 stow-packages() {
 	if [[ "$OSTYPE" = "linux-gnu" ]]; then
 		while IFS= read -r pkg; do
-			stow "$pkg"
+			stow -R "$pkg"
 		done <<< $1
 	elif [[ "$OSTYPE" = "cygwin" || "$OSTYPE" = "msys" ]]; then
 		while IFS= read -r pkg; do
