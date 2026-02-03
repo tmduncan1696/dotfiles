@@ -59,7 +59,7 @@ create-backups() {
 copy-home() {
 	local files=$(find $1 -type f)
 	while IFS= read -r file; do
-		cp $file $(sed -n "s|[^/]|$HOME|p" <<< $file)
+		cp $file $(sed -n "s|[^/]*|$HOME|p" <<< $file)
 	done <<< $files
 }
 
