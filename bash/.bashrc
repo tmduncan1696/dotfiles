@@ -119,5 +119,5 @@ fi
 export BROWSER="wslview"
 . "$HOME/.cargo/env"
 
-PATH=$PATH:/home/tmdun/.local/bin/
-eval "$(oh-my-posh init bash --config 'atomic')"
+PATH=$PATH:$HOME/.local/bin/
+eval "$(oh-my-posh init bash --config "$HOME/.config/posh/.mytheme.omp.json")"
