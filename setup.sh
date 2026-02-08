@@ -6,17 +6,40 @@ set -o pipefail
 
 PACKAGES=$(ls -d */ | cut -f 1 -d '/')
 
+# Get package manager
+get-package-manager() {
+	# If running on Linux
+	if [[ "$OSTYPE" = "linux-gnu" ]]; then
+		# Check for apt
+		if [[ $(which apt) ]]; then # Check for apt
+			echo "apt"
+		elif [[ $(which dnf) ]]; then # Check for dnf
+			echo "dnf"
+		else
+			echo "Not running on Debian or Fedora based system" &>2
+		fi
+	# if running on Windows
+	elif [[ "$OSTYPE" = "cygwin" || "$OSTYPE" = "msys" ]]; then
+		echo "winget"
+	else
+		echo "Operating System $OSTYPE not implemented" >&2
+	fi
+
+}
+
 # Install package
-# takes 1 argument: package to install
+# takes 2 arguments: 
+# 	package manager
+# 	package to install
 install-package() {
-	PKG_EXIST=$(dpkg -s "$1" | grep "install ok installed")
+	PKG_EXIST=$( $1 list --installed | grep "$2")
 	if [[ -n "$PKG_EXIST" ]]; then 
-		echo "$1 is already installed"
+		echo "$2 is already installed"
 		return
 	fi
 
-	echo "Installing $1"
-	apt install "$1" -y
+	echo "Installing $2"
+	eval "$1 install $2 -y"
 }
 
 # Install oh-my-posh
@@ -30,7 +53,7 @@ install-posh() {
 	curl -s https://ohmyposh.dev/install.sh | bash -s
 
 	echo "Installing meslo Nerd Font"
-	oh-my-posh font meslo
+	oh-my-posh font install meslo
 }
 
 # Setup Neovim
@@ -52,7 +75,7 @@ create-backups() {
 			if [[ -f $file ]]; then
 				mv "$file" "$file.bak"
 			fi
-		done
+		done <<< $files
 	done <<< $1
 }
 
@@ -83,11 +106,12 @@ stow-packages() {
 main() {
 	# If running on Linux
 	if [[ "$OSTYPE" = "linux-gnu" ]]; then
+		local pkg_mgr=$(get-package-manager)
 		# Install stow if it doesn't exist
-		install-package stow
+		install-package $pkg_mgr stow
 
-		# Install Neovim
-		install-package neovim
+		# Install Neovim if it doesn't exist
+		install-package $pkg_mgr neovim
 	# if running on Windows
 	elif [[ "$OSTYPE" = "cygwin" || "$OSTYPE" = "msys" ]]; then
 		# Install Neovim
