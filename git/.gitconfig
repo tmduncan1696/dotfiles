@@ -2,10 +2,10 @@
 	name = Thomas Duncan
 	email = tmduncan1696@gmail.com
 [credential "https://github.com"]
-	helper = 
+	helper = cache
 	helper = !/usr/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
+	helper = cache
 	helper = !/usr/bin/gh auth git-credential
 [init]
 	defaultBranch = main
