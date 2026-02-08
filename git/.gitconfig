@@ -3,10 +3,8 @@
 	email = tmduncan1696@gmail.com
 [credential "https://github.com"]
 	helper = cache
-	helper = !/usr/bin/gh auth git-credential
 [credential "https://gist.github.com"]
 	helper = cache
-	helper = !/usr/bin/gh auth git-credential
 [init]
 	defaultBranch = main
 [pull]
