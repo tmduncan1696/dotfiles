@@ -116,8 +116,9 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export BROWSER="wslview"
-. "$HOME/.cargo/env"
+if [[ -f "$HOME/.cargo/env" ]]; then
+	. "$HOME/.cargo/env"
+fi
 
 PATH=$PATH:$HOME/.local/bin/
 eval "$(oh-my-posh init bash --config "$HOME/.config/posh/.mytheme.omp.json")"
