@@ -6,47 +6,11 @@ set -o pipefail
 
 PACKAGES=$(ls -d */ | cut -f 1 -d '/')
 
-# Get package manager
-get-package-manager() {
-	# If running on Linux
-	if [[ "$OSTYPE" = "linux-gnu" ]]; then
-		# Check for apt
-		if [[ $(which apt) ]]; then # Check for apt
-			echo "apt"
-		elif [[ $(which dnf) ]]; then # Check for dnf
-			echo "dnf"
-		else
-			echo "Not running on Debian or Fedora based system" &>2
-		fi
-	# if running on Windows
-	elif [[ "$OSTYPE" = "cygwin" || "$OSTYPE" = "msys" ]]; then
-		echo "winget"
-	else
-		echo "Operating System $OSTYPE not implemented" >&2
-	fi
-
-}
-
-# Install package
-# takes 2 arguments: 
-# 	package manager
-# 	package to install
-install-package() {
-	PKG_EXIST=$( $1 list --installed | grep "$2")
-	if [[ -n "$PKG_EXIST" ]]; then 
-		echo "$2 is already installed"
-		return
-	fi
-
-	echo "Installing $2"
-	eval "$1 install $2 -y"
-}
-
 # Install oh-my-posh
 install-posh() {
 	if command -v oh-my-posh >/dev/null 2>&1; then
 		echo "oh-my-posh is already installed"
-		return
+		return 0
 	fi
 
 	echo "Installing oh-my-posh"
@@ -104,22 +68,6 @@ stow-packages() {
 }
 
 main() {
-	# If running on Linux
-	if [[ "$OSTYPE" = "linux-gnu" ]]; then
-		local pkg_mgr=$(get-package-manager)
-		# Install stow if it doesn't exist
-		install-package $pkg_mgr stow
-
-		# Install Neovim if it doesn't exist
-		install-package $pkg_mgr neovim
-	# if running on Windows
-	elif [[ "$OSTYPE" = "cygwin" || "$OSTYPE" = "msys" ]]; then
-		# Install Neovim
-		winget install Neovim.Neovim
-	else
-		echo "Operating System $OSTYPE not implemented" >&2
-	fi
-
 	# Stow packages
 	create-backups $PACKAGES
 	stow-packages $PACKAGES
