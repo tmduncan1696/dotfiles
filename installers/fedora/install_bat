@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
 
-echo "Installing bat"
-sudo dnf install -y bat
+install-bat() {
+	sudo dnf install bat
+}
+
+if [[ ! -x "$(command -v bat)" ]]; then
+	install-bat
+fi

@@ -1,4 +1,9 @@
-#!/usr/bin/env
+#!/usr/bin/env bash
 
-echo "Installing stow"
-sudo dnf install stow
+install-stow() {
+	sudo dnf install stow
+}
+
+if [[ ! -x "$(command -v stow)" ]]; then
+	install-stow
+fi

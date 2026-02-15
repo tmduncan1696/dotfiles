@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
 
-echo "Installing tmux"
-sudo dnf install tmux
+install-tmux() {
+	sudo dnf install tmux
+}
+
+if [[ ! -x "$(command -v tmux)" ]]; then
+	install-tmux
+fi

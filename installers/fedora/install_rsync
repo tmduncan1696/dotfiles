@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+install-rsync() {
+	sudo dnf install rsync
+}
+
+if [[ ! -x "$(command -v rsync)" ]]; then
+	install-rsync
+fi

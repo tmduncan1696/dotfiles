@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
 
-echo "Installing fzf"
-sudo dnf install -y fzf
+install-fzf() {
+	sudo dnf install -y fzf
+}
+
+if [[ ! -x "$(command -v fzf)" ]]; then
+	install-fzf
+fi

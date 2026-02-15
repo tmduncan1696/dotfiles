@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
 
-echo "Installing fd"
-sudo dnf install -y fd-find
+install-fd() {
+	sudo dnf install -y fd-find
+}
+
+if [[ ! -x "$(command -v fd)" ]]; then
+	install-fd
+fi

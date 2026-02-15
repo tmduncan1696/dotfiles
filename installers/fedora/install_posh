@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
-echo "Installing oh-my-posh"
-curl -s https://ohmyposh.dev/install.sh | bash -s
-export PATH=$PATH:/home/thomas/.local/bin
+install-posh() {
+	curl -s https://ohmyposh.dev/install.sh | bash -s
+	oh-my-posh font install meslo
+}
 
-echo "Installing Meslo Nerd Font"
-oh-my-posh font install meslo
+export PATH=$PATH:/home/thomas/.local/bin
+if [[ ! -x "$(command -v oh-my-posh)" ]]; then
+	install-posh
+fi

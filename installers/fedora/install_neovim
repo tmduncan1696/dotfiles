@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
 
-echo "Installing Neovim"
-sudo dnf install -y neovim python3-neovim
+install-neovim() {
+	sudo dnf install -y neovim python3-neovim
+}
+
+if [[ ! -x "$(command -v nvim)" ]]; then
+	install-neovim
+fi
