@@ -2,6 +2,7 @@
 
 echo "Installing oh-my-posh"
 curl -s https://ohmyposh.dev/install.sh | bash -s
+export PATH=$PATH:/home/thomas/.local/bin
 
 echo "Installing Meslo Nerd Font"
 oh-my-posh font install meslo
