@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "Installing unzip"
+sudo apt install unzip
