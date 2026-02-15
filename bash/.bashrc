@@ -72,4 +72,6 @@ PATH=$PATH:$HOME/.local/bin/
 eval "$(oh-my-posh init bash --config "$HOME/.config/posh/.mytheme.omp.json")"
 
 # fzf
-eval "$(fzf --bash)"
+if [[ $(fzf --version | cut -d " " -f 1 | cut -d "." -f 2) -ge 48 ]]; then
+	eval "$(fzf --bash)"
+fi
