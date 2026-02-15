@@ -2,9 +2,9 @@
 	name = Thomas Duncan
 	email = tmduncan1696@gmail.com
 [credential "https://github.com"]
-	helper = cache
+	helper = store
 [credential "https://gist.github.com"]
-	helper = cache
+	helper = store
 [init]
 	defaultBranch = main
 [pull]
