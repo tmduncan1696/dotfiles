@@ -7,4 +7,6 @@ install-neovim() {
 	sudo apt-get install neovim -y
 }
 
-install-neovim
+if [ ! -x "$(command -v nvim)" ]; then
+	install-neovim
+fi

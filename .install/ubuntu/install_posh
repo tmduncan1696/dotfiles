@@ -20,5 +20,10 @@ cleanup() {
 
 trap cleanup ERR
 
-install-unzip
-install-posh
+if [ ! -x "$(command -v unzip)" ]; then
+	install-unzip
+fi
+
+if [ ! -x "$(command -v oh-my-posh)" ]; then
+	install-posh
+fi

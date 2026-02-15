@@ -5,4 +5,6 @@ install-fd() {
 	sudo apt install -y fd-find
 }
 
-install-fd
+if [ ! -x "$(command -v fdfind)" ]; then
+	install-fd
+fi

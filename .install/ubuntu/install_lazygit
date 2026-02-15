@@ -14,4 +14,7 @@ install-lazygit() {
 
 trap cleanup ERR
 
-install-lazygit
+if [ ! -x "$(command -v lazygit)" ]; then
+	install-lazygit
+fi
+
