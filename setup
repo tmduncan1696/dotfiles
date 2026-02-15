@@ -36,7 +36,7 @@ create-backups() {
 	while IFS= read -r pkg; do
 		local files=$(find "$pkg" -type f | sed -n "s|$pkg|$HOME|p")
 		while IFS= read -r file; do
-			if [[ -f $file ]]; then
+			if [[ -f "$file" && ! -f "$file.bak" ]]; then
 				mv "$file" "$file.bak"
 			fi
 		done <<< $files
@@ -79,7 +79,7 @@ main() {
 	install-posh
 
 	# Reload .bashrc
-	exec bash
+	. ~/.bashrc
 }
 
 main
