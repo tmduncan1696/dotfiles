@@ -46,8 +46,8 @@ stow-packages() {
 
 main() {
 	# Stow packages
-	create-backups $PACKAGES
-	stow-packages $PACKAGES
+	create-backups "$PACKAGES"
+	stow-packages "$PACKAGES"
 
 	# Reload .bashrc
 	source ~/.bashrc
