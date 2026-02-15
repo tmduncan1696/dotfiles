@@ -8,7 +8,7 @@ install-unzip() {
 install-posh() {
 	echo "Installing oh-my-posh"
 	curl -s https://ohmyposh.dev/install.sh | bash -s
-	export PATH=$PATH:/home/thomas/.local/bin
+	export PATH="$PATH:$HOME/.local/bin"
 
 	echo "Installing Meslo Nerd Font"
 	oh-my-posh font install meslo
@@ -22,4 +22,3 @@ trap cleanup ERR
 
 install-unzip
 install-posh
-
