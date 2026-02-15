@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# Install zip first
+echo "Installing unzip"
+sudo apt install unzip
+
 echo "Installing oh-my-posh"
 curl -s https://ohmyposh.dev/install.sh | bash -s
 export PATH=$PATH:/home/thomas/.local/bin
