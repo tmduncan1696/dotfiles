@@ -5,6 +5,6 @@ install-bat() {
 	sudo apt install -y bat
 }
 
-if [ ! -x "$(command -v batcat)" ]; then
+if [[ ! -x "$(command -v batcat)" ]]; then
 	install-bat
 fi

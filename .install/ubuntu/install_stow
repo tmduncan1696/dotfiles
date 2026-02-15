@@ -5,6 +5,6 @@ install-stow() {
 	sudo apt install stow
 }
 
-if [ ! -x "$(command -v stow)" ]; then
+if [[ ! -x "$(command -v stow)" ]]; then
 	install-stow
 fi
