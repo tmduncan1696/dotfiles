@@ -10,9 +10,17 @@ detect-os() {
 #	OS ID
 install() {
 	local files=$(find ".install/$1" -type f)
+	local failed_packages
 	while IFS= read -r file; do
 		. "$file"
+		if [ $? -ne 0 ]; then
+			failed_packages="$failed_packages;$(echo $file | cut -d / -f 3 | cut -d _ -f 2)"
+		fi
 	done <<< $files
+	if [ -n failed_packages ]; then
+		echo "The following packages failed to install:"
+		echo "$failed_packages" | sed -s "s/;/\n/g"
+	fi
 }
 
 main() {
