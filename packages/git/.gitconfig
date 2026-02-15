@@ -1,0 +1,15 @@
+[user]
+	name = Thomas Duncan
+	email = tmduncan1696@gmail.com
+[credential "https://github.com"]
+	helper = store
+[credential "https://gist.github.com"]
+	helper = store
+[init]
+	defaultBranch = main
+[pull]
+	rebase = true
+[core]
+	editor = nvim
+[push]
+	autoSetupRemote = true
