@@ -8,16 +8,18 @@ detect-os() {
 # Run install script
 # Args:
 #	OS ID
-#	program to install
+#	Flags to send to the install scripts
 install() {
-	. ".install/$1/install_$2"
+	local files=$(find ".install/$1" -type f)
+	while IFS= read -r file; do
+		. "$file"
+	done <<< $files
 }
 
 main() {
 	local os=$(detect-os)
 
-	install $os lazygit
-	install $os posh
+	install $os
 }
 
 main
