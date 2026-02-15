@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
 
-echo "Installing bat"
-sudo apt install -y bat
+install-bat() {
+	echo "Installing bat"
+	sudo apt install -y bat
+}
+
+install-bat

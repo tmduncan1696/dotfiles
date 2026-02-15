@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
-echo "Installing Neovim"
-sudo add-apt-repository ppa:neovim-ppa/stable -y
-sudo apt-get update -y
-sudo apt-get install neovim -y
+install-neovim() {
+	echo "Installing Neovim"
+	sudo add-apt-repository ppa:neovim-ppa/stable -y
+	sudo apt-get update -y
+	sudo apt-get install neovim -y
+}
+
+install-neovim

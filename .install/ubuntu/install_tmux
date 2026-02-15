@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
 
-echo "Installing tmux"
-sudo apt install tmux
+install-tmux() {
+	echo "Installing tmux"
+	sudo apt install tmux
+}
+
+install-tmux
