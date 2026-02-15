@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+main() {
+	local os = fedora
+
+	./"$os"/install_lazygit
+}
