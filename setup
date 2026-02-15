@@ -4,7 +4,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-PACKAGES=$(ls -d */ | cut -f 1 -d '/')
+PACKAGES=$(find packages/ -maxdepth 1 -mindepth 1 type -d)
 
 # Create backup files
 # Args:
@@ -14,7 +14,7 @@ create-backups() {
 		local files=$(find "$pkg" -type f | sed -n "s|$pkg|$HOME|p")
 		while IFS= read -r file; do
 			if [[ -f "$file" && ! -L "$file" ]]; then
-				mv "$file" "$file.bak"
+				rsync "$file" "$file.bak"
 			fi
 		done <<< $files
 	done <<< $1
@@ -32,9 +32,7 @@ copy-home() {
 #	Packages to create symlinks for
 stow-packages() {
 	if [[ "$OSTYPE" = "linux-gnu" ]]; then
-		while IFS= read -r pkg; do
-			stow -R "$pkg"
-		done <<< $1
+		find packages/ -maxdepth 1 -mindepth 1 type -d -printf "%f\n" | xargs stow -R -d packages -t $HOME
 	elif [[ "$OSTYPE" = "cygwin" || "$OSTYPE" = "msys" ]]; then
 		while IFS= read -r pkg; do
 			copy-home "$pkg"
