@@ -6,7 +6,6 @@ install-unzip() {
 }
 
 install-posh() {
-	export PATH="$PATH:$HOME/.local/bin"
 	echo "Installing oh-my-posh"
 	curl -s https://ohmyposh.dev/install.sh | bash -s
 
@@ -24,6 +23,7 @@ if [[ ! -x "$(command -v unzip)" ]]; then
 	install-unzip
 fi
 
+export PATH="$PATH:$HOME/.local/bin"
 if [[ ! -x "$(command -v oh-my-posh)" ]]; then
 	install-posh
 fi
