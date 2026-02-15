@@ -6,6 +6,20 @@ set -o pipefail
 
 PACKAGES=$(ls -d */ | cut -f 1 -d '/')
 
+# Create backup files
+# Args:
+#	Packages to create backups for if the configs are not symlinks
+create-backups() {
+	while IFS= read -r pkg; do
+		local files=$(find "$pkg" -type f | sed -n "s|$pkg|$HOME|p")
+		while IFS= read -r file; do
+			if [[ -f "$file" && ! -L "$file" ]]; then
+				mv "$file" "$file.bak"
+			fi
+		done <<< $files
+	done <<< $1
+}
+
 copy-home() {
 	local files=$(find $1 -type f)
 	while IFS= read -r file; do
@@ -32,6 +46,7 @@ stow-packages() {
 
 main() {
 	# Stow packages
+	create-backups "$PACKAGES"
 	stow-packages "$PACKAGES"
 
 	# Reload .bashrc
