@@ -17,7 +17,7 @@ install() {
 			failed_packages="$failed_packages;$(echo $file | cut -d / -f 3 | cut -d _ -f 2)"
 		fi
 	done <<< $files
-	if [[ -n failed_packages ]]; then
+	if [[ -n $failed_packages ]]; then
 		echo "The following packages failed to install:"
 		echo "$failed_packages" | sed -s "s/;/\n/g"
 	fi
