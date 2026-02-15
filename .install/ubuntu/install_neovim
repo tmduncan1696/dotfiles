@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "Installing Neovim"
+sudo apt install -y neovim python3-neovim

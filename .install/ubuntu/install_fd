@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "Installing fd"
+sudo apt install -y fd-find

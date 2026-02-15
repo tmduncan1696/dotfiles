@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+echo "Installing oh-my-posh"
+curl -s https://ohmyposh.dev/install.sh | bash -s
+
+echo "Installing Meslo Nerd Font"
+oh-my-posh font install meslo
