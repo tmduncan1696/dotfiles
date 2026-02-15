@@ -1,7 +1,22 @@
 #!/usr/bin/env bash
 
-main() {
-	local os = fedora
-
-	./"$os"/install_lazygit
+# Detect OS
+detect-os() {
+	grep ^ID /etc/os-release | cut -d = -f 2
 }
+
+# Run install script
+# Args:
+#	OS ID
+#	program to install
+install() {
+	. ".install/$1/install_$2"
+}
+
+main() {
+	local os=$(detect-os)
+
+	install $os lazygit
+}
+
+main
