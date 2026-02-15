@@ -17,6 +17,7 @@ main() {
 	local os=$(detect-os)
 
 	install $os lazygit
+	install $os posh
 }
 
 main
