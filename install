@@ -10,7 +10,7 @@ detect-os() {
 #	OS ID
 install() {
 	local files=$(find ".install/$1" -type f)
-	local failed_packages
+	local failed_packages=
 	while IFS= read -r file; do
 		. "$file"
 		if [ $? -ne 0 ]; then
