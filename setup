@@ -50,7 +50,7 @@ main() {
 	stow-packages $PACKAGES
 
 	# Reload .bashrc
-	. ~/.bashrc
+	source ~/.bashrc
 }
 
 main
