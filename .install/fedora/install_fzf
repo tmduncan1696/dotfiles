@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "Installing fzf"
+sudo dnf install -y fzf

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
 echo "Installing Lazygit"
-sudo dnf copr enable dejan/lazygit -y
-sudo dnf install lazygit -y
+sudo dnf copr -y enable dejan/lazygit
+sudo dnf install -y lazygit

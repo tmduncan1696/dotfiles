@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "Installing fd"
+sudo dnf install -y fd-find
