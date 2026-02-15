@@ -1,0 +1,4 @@
+#!/usr/bin/env
+
+echo "Installing stow"
+sudo dnf install stow

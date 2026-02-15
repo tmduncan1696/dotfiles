@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "Installing stow"
+sudo apt install stow
