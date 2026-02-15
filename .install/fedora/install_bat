@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "Installing bat"
+sudo dnf install -y bat
