@@ -8,7 +8,6 @@ detect-os() {
 # Run install script
 # Args:
 #	OS ID
-#	Flags to send to the install scripts
 install() {
 	local files=$(find ".install/$1" -type f)
 	while IFS= read -r file; do
