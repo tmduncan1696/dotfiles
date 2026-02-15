@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "Installing tmux"
+sudo dnf install tmux
