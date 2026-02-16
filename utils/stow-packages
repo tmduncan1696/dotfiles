@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 copy-package() {
-	local files=$(find $1 -type f)
+	local files=$(find "packages/$1" -type f)
 	local target=$2
 	while IFS= read -r file; do
 		cp $file $(sed -n "s|[^/]*|${targets[pkg]}|p" <<< $file)
@@ -14,7 +14,7 @@ stow-package() {
 
 	case "$OSTYPE" in 
 		"linux-gnu")
-			stow "$pkg" -R -d packages -t "$target"
+			stow -R "$pkg" -d packages -t "$target"
 			;;
 		"cygwin"|"msys")
 			copy-package "$pkg" "$target"
