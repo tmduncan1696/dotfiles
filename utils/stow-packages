@@ -41,7 +41,7 @@ stow-packages() {
 			;;
 	esac
 
-	while IFS= read -R -d pkg; do
+	while IFS= read -r pkg; do
 		stow-package "$pkg" "${targets[pkg]}"
 	done <<< $packages
 }
