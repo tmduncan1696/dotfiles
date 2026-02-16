@@ -4,7 +4,7 @@ source utils/create-backups
 source utils/stow-packages
 source utils/parse-targets
 
-PACKAGES=$(find packages/ -maxdepth 1 -mindepth 1 type -d)
+PACKAGES="$(find packages/ -maxdepth 1 -mindepth 1 type -d)"
 declare -A TARGETS="($(parse-targets packages.yaml))"
 
 main() {
