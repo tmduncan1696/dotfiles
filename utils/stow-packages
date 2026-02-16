@@ -12,7 +12,7 @@ stow-package() {
 	local pkg=$1
 	local target=$2
 
-	case "$OSTYPE"
+	case "$OSTYPE" in 
 		"linux-gnu")
 			stow "$pkg" -R -d packages -t "$target"
 			;;
@@ -31,7 +31,7 @@ stow-package() {
 stow-packages() {
 	local packages=$1
 	declare -n targets=$2
-	case "$OSTYPE"
+	case "$OSTYPE" in 
 		"linux-gnu"|"cygwin"|"msys")
 			;;
 		*) 
