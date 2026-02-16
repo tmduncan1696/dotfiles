@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# Create backup files
+# Args:
+#	Packages to create backups for if the configs are not symlinks
+#	Target locations of package backups
+create-backups() {
+	local packages=$1
+	declare -n targets=$2
+
+	while IFS= read -r pkg; do
+		local target="${targets[pkg]}"
+		local files=$(find "$pkg" -type f | sed -n "s|$pkg|$target|p")
+		while IFS= read -r file; do
+			if [[ -f "$file" && ! -L "$file" ]]; then
+				rsync "$file" "$file.bak"
+			fi
+		done <<< $files
+	done <<< $packages
+}

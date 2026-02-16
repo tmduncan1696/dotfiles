@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+parse-targets() {
+	yaml_file=$1
+	declare -A targets
+	while IFS="|" read -r key value; do
+		[[ -z "$key" ]] && continue
+		targets["$key"]="$value"
+	done < <(
+		yq -r '.targets | to_entries[] | "\(.key)|\(.value)"' $yaml_file
+	)
+
+	printf "%s " "${targets[@]@K}"
+}
