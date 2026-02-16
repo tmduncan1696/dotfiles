@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 install-yq() {
-	sudo apt install yq
+	sudo apt install -y yq
 }
 
 if [[ ! -x "$(command -v yq)" ]]; then
