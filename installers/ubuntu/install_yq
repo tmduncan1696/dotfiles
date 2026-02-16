@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+install-yq() {
+	sudo apt install yq
+}
+
+if [[ ! -x "$(command -v yq)" ]]; then
+	install-yq
+fi
