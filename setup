@@ -1,54 +1,19 @@
 #!/usr/bin/env bash
 
-set -o errexit
-set -o nounset
-set -o pipefail
+source utils/create-backups
+source utils/stow-packages
+source utils/parse-targets
 
 PACKAGES=$(find packages/ -maxdepth 1 -mindepth 1 type -d)
-
-# Create backup files
-# Args:
-#	Packages to create backups for if the configs are not symlinks
-create-backups() {
-	while IFS= read -r pkg; do
-		local files=$(find "$pkg" -type f | sed -n "s|$pkg|$HOME|p")
-		while IFS= read -r file; do
-			if [[ -f "$file" && ! -L "$file" ]]; then
-				rsync "$file" "$file.bak"
-			fi
-		done <<< $files
-	done <<< $1
-}
-
-copy-home() {
-	local files=$(find $1 -type f)
-	while IFS= read -r file; do
-		cp $file $(sed -n "s|[^/]*|$HOME|p" <<< $file)
-	done <<< $files
-}
-
-# Stow packages
-# Args:
-#	Packages to create symlinks for
-stow-packages() {
-	if [[ "$OSTYPE" = "linux-gnu" ]]; then
-		find packages/ -maxdepth 1 -mindepth 1 type -d -printf "%f\n" | xargs stow -R -d packages -t $HOME
-	elif [[ "$OSTYPE" = "cygwin" || "$OSTYPE" = "msys" ]]; then
-		while IFS= read -r pkg; do
-			copy-home "$pkg"
-		done <<< $1
-	else
-		echo "Operating System $OSTYPE not implemented" >&2
-	fi
-}
+declare -A TARGETS="($(parse-targets packages.yaml))"
 
 main() {
 	# Stow packages
-	create-backups "$PACKAGES"
-	stow-packages "$PACKAGES"
+	create-backups "$PACKAGES" "$TARGETS"
+	stow-packages "$PACKAGES" "$TARGETS"
 
-	# Reload .bashrc
-	source ~/.bashrc
+	# Reload bash
+	exec bash
 }
 
 main
