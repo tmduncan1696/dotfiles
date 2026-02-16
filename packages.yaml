@@ -1,0 +1,7 @@
+targets:
+  bash: "~"
+  git: "~"
+  lazygit: "~/.config/lazygit"
+  nvim: "~/.config/nvim"
+  posh: "~/.config/posh"
+  tmux: "~"
