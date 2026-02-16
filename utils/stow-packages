@@ -18,6 +18,7 @@ stow-package() {
 			;;
 		"cygwin"|"msys")
 			copy-package "$pkg" "$target"
+			;;
 		*)
 			echo "Operating System $OSTYPE not implemented" >&2
 			exit 1
