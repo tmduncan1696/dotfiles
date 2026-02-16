@@ -32,6 +32,7 @@ stow-package() {
 stow-packages() {
 	local packages=$1
 	declare -n targets=$2
+
 	case "$OSTYPE" in 
 		"linux-gnu"|"cygwin"|"msys")
 			;;
@@ -42,6 +43,6 @@ stow-packages() {
 	esac
 
 	while IFS= read -r pkg; do
-		stow-package "$pkg" "${targets[pkg]}"
+		stow-package "$pkg" "${targets[$pkg]}"
 	done <<< $packages
 }
