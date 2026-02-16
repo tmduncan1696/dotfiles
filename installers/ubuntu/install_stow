@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 install-stow() {
-	echo "Installing stow"
 	sudo apt install stow
 }
 

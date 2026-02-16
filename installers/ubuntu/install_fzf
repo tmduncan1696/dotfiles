@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 install-fzf() {
-	echo "Installing fzf"
 	sudo apt install -y fzf
 }
 

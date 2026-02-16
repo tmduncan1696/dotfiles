@@ -1,15 +1,12 @@
 #!/usr/bin/env bash
 
 install-unzip() {
-	echo "Installing unzip"
 	sudo apt install unzip
 }
 
 install-posh() {
-	echo "Installing oh-my-posh"
 	curl -s https://ohmyposh.dev/install.sh | bash -s
 
-	echo "Installing Meslo Nerd Font"
 	oh-my-posh font install meslo
 }
 

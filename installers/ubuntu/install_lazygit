@@ -1,20 +1,12 @@
 #!/usr/bin/env bash
 
-cleanup() {
-	rm "$HOME/lazygit.tar.gz"
-}
-
 install-lazygit() {
-	echo "Installing Lazygit"
 	LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
 	curl -Lo "$HOME/lazygit.tar.gz" "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
 	tar xf "$HOME/lazygit.tar.gz" -C "$HOME"
-	sudo install "$HOME/lazygit" -D -t /usr/local/bin/
+	sudo install -y "$HOME/lazygit" -D -t /usr/local/bin/
 }
-
-trap cleanup ERR
 
 if [[ ! -x "$(command -v lazygit)" ]]; then
 	install-lazygit
 fi
-

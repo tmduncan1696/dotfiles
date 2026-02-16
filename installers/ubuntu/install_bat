@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 install-bat() {
-	echo "Installing bat"
 	sudo apt install -y bat
 }
 
