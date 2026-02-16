@@ -10,7 +10,7 @@ create-backups() {
 
 	while IFS= read -r pkg; do
 		local target="${targets[pkg]}"
-		local files=$(find "$pkg" -type f | sed -n "s|$pkg|$target|p")
+		local files=$(find "packages/$pkg" -type f | sed -n "s|packages/$pkg|$target|p")
 		while IFS= read -r file; do
 			if [[ -f "$file" && ! -L "$file" ]]; then
 				rsync "$file" "$file.bak"
