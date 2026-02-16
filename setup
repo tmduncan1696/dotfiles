@@ -9,8 +9,8 @@ declare -A TARGETS="($(parse-targets packages.yaml))"
 
 main() {
 	# Stow packages
-	create-backups "$PACKAGES" "$TARGETS"
-	stow-packages "$PACKAGES" "$TARGETS"
+	create-backups "$PACKAGES" TARGETS
+	stow-packages "$PACKAGES" TARGETS
 
 	# Reload bash
 	exec bash
